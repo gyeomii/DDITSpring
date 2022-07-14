@@ -13,31 +13,56 @@ import javax.servlet.http.HttpServletResponse;
 public class BackgroundServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String color = request.getParameter("color");
+		String url = "/WEB-INF/views/colorForm.jsp";
 		
-		response.setContentType("text/html;charset=utf-8");
-		PrintWriter out = response.getWriter();
-		
-		String html = "";
-		html += "<!DOCTYPE>\n";
-		html += "<html>\n";
-			html += "<head>\n";
-				html += "<title>\n";
-					html += "배경색 바꾸기\n";
-				html += "</title>\n";
-				html += "<style>\n";
-					html += "body{background:"+color+";}\n";
-				html += "</style>\n";
-			html += "</head>\n";
-			html += "<body>\n";
-			html += "</body>\n";
-		html += "</html>\n";
-		
-		out.println(html);
+		request.getRequestDispatcher(url).forward(request, response);
+//		response.setContentType("text/html;charset=utf-8");
+//		PrintWriter out = response.getWriter();
+//		
+//		String html = "";
+//		html += "<!DOCTYPE>\n";
+//		html += "<html>\n";
+//			html += "<head>\n";
+//				html += "<title>\n";
+//					html += "배경색 바꾸기\n";
+//				html += "</title>\n";
+//			html += "</head>\n";
+//			html += "<body>\n";
+//				html += "<form method='post'/>\n";
+//				html += "<input type='text' name='color'/>\n";
+//				html += "<input type='submit' value='변경'/>\n";
+//				html += "</form>\n";
+//			html += "</body>\n";
+//		html += "</html>\n";
+//		
+//		out.println(html);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+		String url = "/WEB-INF/views/color.jsp";
+		
+		request.getRequestDispatcher(url).forward(request, response);		
+//		String color = request.getParameter("color");
+//		
+//		response.setContentType("text/html;charset=utf-8");
+//		PrintWriter out = response.getWriter();
+//		
+//		String html = "";
+//		html += "<!DOCTYPE>\n";
+//		html += "<html>\n";
+//			html += "<head>\n";
+//				html += "<title>\n";
+//					html += "배경색 바꾸기\n";
+//				html += "</title>\n";
+//				html += "<style>\n";
+//					html += "body{background:"+color+";}\n";
+//				html += "</style>\n";
+//			html += "</head>\n";
+//			html += "<body>\n";
+//			html += "</body>\n";
+//		html += "</html>\n";
+//		
+//		out.println(html);
 	}
 
 }
