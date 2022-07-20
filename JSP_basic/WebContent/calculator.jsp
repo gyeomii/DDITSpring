@@ -5,60 +5,23 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<link rel="stylesheet" href="calc.css">
 <title>Insert title here</title>
-<style>
-* {
-	
-}
-
-.col-md-1, .zero {
-	text-align: center;
-	fontSize: 1.5em;
-	background-color: grey;
-	width: 17%;
-	margin: 10px;
-	padding-top: 10px;
-	padding-bottom: 10px;
-	float: left;
-}
-
-.op {
-	background-color: orange;
-}
-
-.wrapper {
-	border: 5px solid black;
-	width: 300px;
-	height: 400px;
-	padding: 20px;
-}
-
-input {
-	width: 100%;
-	height: 40px;
-	text-align: right;
-}
-
-.row {
-	width: 100%;
-}
-</style>
 </head>
 <body>
 	<h1>계산기</h1>
 	<div>
-
 		<div class="wrapper">
 			<div class="row">
 				<input type="text" id="out" value="" />
 			</div>
 			<div class="row">
-				<input type="text" id="show"
-					value="<%out.print(request.getAttribute("result"));%>" />
+				<input type="text" id="show" value="<%= request.getAttribute("result")%>" />
 			</div>
-			<br>
+			<div>
+				<input type="button" id="reset" value="reset" onclick="reset()"/>
+			</div>
 			<div class="row">
 				<div class="col-md-1" onclick="getNum('7')">7</div>
 				<div class="col-md-1" onclick="getNum('8')">8</div>
@@ -83,13 +46,11 @@ input {
 				<div class="col-md-1" onclick="send()" id="send">=</div>
 				<div class="col-md-1 op" onclick="getOper('+')">+</div>
 			</div>
-			<div>
-				<input type="button" value="reset" onclick="reset()"/>
-			</div>
 		</div>
 		<form action="/JSP_basic/calculator" method="post" id="form">
 			<input type="hidden" name="firstNum" id="f" />
-			<input type="hidden" name="operator" id="o"> <input type="hidden" name="secondNum" id="s" />
+			<input type="hidden" name="operator" id="o"/>
+			<input type="hidden" name="secondNum" id="s" />
 		</form>
 	</div>
 	<script>
@@ -101,6 +62,7 @@ input {
 			document.getElementById('s').value = numbers;
 			document.getElemetById('form').submit();
 		}
+		
 		function getNum(num) {
 			if (document.getElementById('show').value == '0') {
 				numbers = num;
@@ -109,7 +71,9 @@ input {
 			}
 			document.getElementById('show').value = numbers;
 		}
+		
 		function getOper(oper) {
+			numbers = document.getElementById('show').value;
 			document.getElementById('f').value = numbers;
 			document.getElementById('o').value = oper;
 			document.getElementById('out').value = numbers + oper;
