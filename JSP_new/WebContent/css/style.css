@@ -1,0 +1,62 @@
+.col-md-1, .zero {
+	text-align: center;
+	fontSize: 1.5em;
+	background-color: grey;
+	width: 70.5px;
+	border-radius: 400px;
+	color: white;
+	font-size: 18px;
+}
+
+#out {
+	height: 25px;
+	background-color: gray;
+	color: white;
+}
+
+.op {
+	background-color: #FF4500;
+}
+
+.wrapper {
+	border: 5px solid black;
+	background-color: #bcbcbc;
+	float : left;
+}
+
+input {
+	width: 95%;
+	text-align: right;
+}
+
+.row {
+	width: 100%;
+}
+
+.reset {
+	width: 265px;
+	background-color: white;
+	color: black;
+}
+
+.inputText {
+	font-size: 30px;
+	width: 295px;
+	border: none;
+	border-right: 0px;
+	border-top: 0px;
+	boder-left: 0px;
+	boder-bottom: 0px;
+	border: none;
+}
+#show{
+	height: 42px;
+}
+#send {
+	background-color: #000080;
+}
+
+#del {
+	background-color: black;
+	color: white;
+}
