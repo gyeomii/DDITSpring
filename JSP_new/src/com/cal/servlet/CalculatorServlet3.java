@@ -85,10 +85,12 @@ public class CalculatorServlet3 extends HttpServlet {
 			}
 			idx++;
 		}
+		
 		Double res = 0.0;
 		for (Double double1 : numList) {
 			res += double1;
 		}
+		
 		request.setAttribute("operator", "");
 		request.setAttribute("result", res);
 		request.setAttribute("sik", sik);

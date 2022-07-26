@@ -16,10 +16,10 @@
 	</div>
 	<div>
 		<form action="calculator" method="post" id="form">
-			<input type="hidden" name="firstNum" id="first"	value="<%out.print(request.getAttribute("result"));%>" />
-			<input type="hidden" name="operator" id="opper"	value="<%out.print(request.getAttribute("operator"));%>" />
+			<input type="hidden" name="firstNum" id="first"	value="${result}" />
+			<input type="hidden" name="operator" id="opper"	value="${operater}" />
 			<input type="hidden" name="secondNum" id="second" />
-			<input type="hidden" name="secondOpper" id="secondOpper" value="<%out.print(request.getAttribute("secondOpper"));%>" />
+			<input type="hidden" name="secondOpper" id="secondOpper" value="${secondOpper}" />
 		</form>
 	</div>
 	<script>
@@ -42,10 +42,10 @@ let clazz = ["col-md-1 num", "col-md-1 op"];
 
 let script ="";
 script += `<tr class="row">
-			<td colspan="4"><input class="inputText" id="out" value="<%out.print(request.getAttribute("formula"));%>"/></td>
+			<td colspan="4"><input class="inputText" id="out" value="${formula}"/></td>
 		   	</tr>
 			<tr class="row">
-			<td colspan="4"><input class="inputText" id="show" value='<%out.print(request.getAttribute("result"));%>'/></td>
+			<td colspan="4"><input class="inputText" id="show" value='${result}'/></td>
 			</tr>`;
 			
 let cnt = 0;

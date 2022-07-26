@@ -11,10 +11,9 @@ import javax.servlet.http.HttpServletResponse;
 
 @WebServlet("/background/color")
 public class BackgroundServlet extends HttpServlet {
-
+	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String url = "/WEB-INF/views/colorForm.jsp";
-		
 		request.getRequestDispatcher(url).forward(request, response);
 //		response.setContentType("text/html;charset=utf-8");
 //		PrintWriter out = response.getWriter();
@@ -40,7 +39,6 @@ public class BackgroundServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String url = "/WEB-INF/views/color.jsp";
-		
 		request.getRequestDispatcher(url).forward(request, response);		
 //		String color = request.getParameter("color");
 //		

@@ -18,10 +18,10 @@
 	</div>
 	<div>
 		<form action="calculator3" method="post" id="form">
-			<input type="hidden" name="firstNum" id="first"	value="<%out.print(request.getAttribute("result"));%>" />
-			<input type="hidden" name="operator" id="opper"	value="<%out.print(request.getAttribute("operator"));%>" />
-			<input type="hidden" name="sik" id="sik"	value="<%out.print(request.getAttribute("sik"));%>" />
-			<input type="hidden" id="returnNum" value="<%out.print(request.getAttribute("result"));%>" />
+			<input type="hidden" name="firstNum" id="first"	value="${result}" />
+			<input type="hidden" name="operator" id="opper"	value="${operator}" />
+			<input type="hidden" name="sik" id="sik"	value="${sik}" />
+			<input type="hidden" id="returnNum" value="${result}" />
 		</form>
 	</div>
 	<script>
@@ -44,10 +44,10 @@ let clazz = ["col-md-1 num", "col-md-1 op"];
 
 let script ="";
 script += `<tr class="row">
-			<td colspan="4"><input class="inputText" id="out" value="<%out.print(request.getAttribute("sik"));%>"/></td>
+			<td colspan="4"><input class="inputText" id="out" value="${sik}"/></td>
 		   	</tr>
 			<tr class="row">
-			<td colspan="4"><input class="inputText" id="show" value='<%out.print(request.getAttribute("result"));%>'/></td>
+			<td colspan="4"><input class="inputText" id="show" value='${result}'/></td>
 			</tr>`;
 			
 let cnt = 0;
