@@ -7,10 +7,9 @@ import com.jsp.dao.MemberDAO;
 import com.jsp.dto.MemberVO;
 
 public class MemberServiceImpl implements MemberService {
-	
+
 	private MemberDAO memberDAO;
-	
-	public void setmemberDAO(MemberDAO memberDAO) {
+	public void setMemberDAO(MemberDAO memberDAO) {
 		this.memberDAO = memberDAO;
 	}
 	
