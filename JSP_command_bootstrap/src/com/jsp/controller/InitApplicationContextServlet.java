@@ -97,8 +97,8 @@ public class InitApplicationContextServlet extends HttpServlet {
 										method.invoke(applicationContext.get(eleBean.getAttribute("id")),
 												applicationContext.get(ref));
 
-										/*System.out.println("[invoke]" + applicationContext.get(eleBean.getAttribute("id"))
-														+ " : " + applicationContext.get(ref));*/
+										System.out.println("[invoke]" + applicationContext.get(eleBean.getAttribute("id"))
+														+ " : " + applicationContext.get(ref));
 									}
 								}
 							}
@@ -109,7 +109,5 @@ public class InitApplicationContextServlet extends HttpServlet {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
 	}
-
 }
