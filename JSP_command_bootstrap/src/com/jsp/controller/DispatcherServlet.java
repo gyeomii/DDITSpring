@@ -41,7 +41,7 @@ public class DispatcherServlet extends HttpServlet {
 	protected void requestPro(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// 사용자 URI검증
 		String command = request.getRequestURI(); // contextPath포함
-		if(command.indexOf(request.getContextPath()) == 0) { // contextPath  삭제
+		if(command.indexOf(request.getContextPath()) == 0) { // contextPath  삭제/member/list
 			command = command.substring(request.getContextPath().length());
 		}
 		//commandHandler 실행(HandlerMapper 의뢰 action 할당)
