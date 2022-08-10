@@ -89,7 +89,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
    			<div class="card-body" style="text-align:center;">
     		  <div class="row">
 	             <div class="col-sm-12">	
-		    		<table class="table table-bordered">
+		    		<table class="table table-bordered table-hover">
 		    			<tr>
 		    				<th>사진</th>
 		                	<th>아이디</th>
@@ -101,8 +101,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
 		               	</tr>
 		     			<c:if test="${!empty memberList }" >
 		            		<c:forEach items="${memberList }" var="member">		     						     				
-		     					 <tr>
-		            		  	   	<td></td>
+		     					 <tr onclick="OpenWindow('detail.do?id=${member.id}','회원상세',700,800);" style="cursor:pointer;">
+		            		  	   	<td style="margin:0;padding:0;padding-top:5px;"><span class="manPicture" data-id="${member.id }" style="display:block;width:40px;height:40px;margin:0 auto;"></span></td>
 		            		  	   	<td>${member.id }</td>
 				              		<td>${member.pwd }</td>
 				              		<td>${member.name }
@@ -171,6 +171,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
 </form>
 
 <script>
+window.onload = function(){	
+	MemberPictureThumb('<%=request.getContextPath()%>');
+}
+</script>
+
+<script>
 	function list_go(page, url){
 		if(!url) url="list.do";
 		var jobForm = $('#jobForm');
@@ -185,24 +191,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
 	}
 </script>
 
-<script>
-    function OpenWindow(UrlStr, WinTitle, WinWidth, WinHeight) {
-        winleft = (screen.width - WinWidth) / 2;
-        wintop = (screen.height - WinHeight) / 2;
-        var win = window.open(UrlStr, WinTitle, "scrollbars=yes,width="
-              + WinWidth + ", " + "height=" + WinHeight + ", top="
-              + wintop + ", left=" + winleft
-              + ", resizable=yes, status=yes");
-        win.focus();
-     }
-</script>
-
 <!-- jQuery -->
 <script src="<%=request.getContextPath()%>/resources/bootstrap/plugins/jquery/jquery.min.js"></script>
 <!-- Bootstrap 4 -->
 <script src="<%=request.getContextPath()%>/resources/bootstrap/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- AdminLTE App -->
 <script src="<%=request.getContextPath()%>/resources/bootstrap/dist/js/adminlte.min.js"></script>
+<!-- common java script -->
+<script src="<%= request.getContextPath()%>/resources/js/common.js"></script>
 </body>
 </html>
     

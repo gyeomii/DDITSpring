@@ -23,10 +23,10 @@ public class GetUploadPath {
 	}
 	
 	public static String getUploadPath(String key) {
-		String uploadPath = null;
+		String uploadPath=null;
 		
-		uploadPath = properties.getProperty(key);
-		uploadPath = uploadPath.replace("/", File.separator);
+		uploadPath=properties.getProperty(key);
+		uploadPath=uploadPath.replace("/",File.separator);
 		
 		return uploadPath;
 	}

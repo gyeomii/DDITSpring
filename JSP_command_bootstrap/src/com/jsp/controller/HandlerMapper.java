@@ -14,7 +14,7 @@ public class HandlerMapper {
 	
 	private Map<String, Action> commandMap = new HashMap<String, Action>();
 	
-	static final String path = "com/jsp/properties/url";
+	static final String path = "com/surt/properties/url";
 	
 	public HandlerMapper() throws Exception{
 		this(path);
