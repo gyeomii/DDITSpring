@@ -6,25 +6,6 @@
 <c:set var="pageMaker" value="${dataMap.pageMaker }"/>
 <c:set var="cri" value="${pageMaker.cri }"/>
     
-<!DOCTYPE html>
-<!--
-This is a starter template page. Use this page to start your new project from
-scratch. This page gets rid of all links and provides the needed markup only.
--->
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>AdminLTE 3 | Starter</title>
-
-  <!-- Google Font: Source Sans Pro -->
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
-  <!-- Font Awesome Icons -->
-  <link rel="stylesheet" href="<%=request.getContextPath()%>/resources/bootstrap/plugins/fontawesome-free/css/all.min.css">
-  <!-- Theme style -->
-  <link rel="stylesheet" href="<%=request.getContextPath()%>/resources/bootstrap/dist/css/adminlte.min.css">
-</head>
-<body class="hold-transition sidebar-mini">
 
 	<div >
 	 <!-- Main content -->
@@ -125,83 +106,17 @@ scratch. This page gets rid of all links and provides the needed markup only.
     	       </div> <!-- row -->
     		</div> <!-- card-body -->
     		<div class="card-footer">
-    			<!-- pagination -->
-    			<nav aria-label="Navigation">
-					<ul class="pagination justify-content-center m-0">
-						<li class="page-item">
-							<a class="page-link" href="javascript:list_go(1);">
-								<i class="fas fa-angle-double-left"></i>
-							</a>
-						</li>
-						<li class="page-item">
-							<a class="page-link" href="javascript:list_go('${pageMaker.prev ? pageMaker.startPage-1 : cri.page}');">
-								<i class="fas fa-angle-left"></i>
-							</a>						
-						</li>
-					
-					<c:forEach var="pageNum" begin="${pageMaker.startPage }" end="${pageMaker.endPage }" >
-						<li class="page-item ${cri.page == pageNum?'active':''}">
-							<a class="page-link" href="javascript:list_go('${pageNum}');" >${pageNum }</a>
-						</li>
-						
-					</c:forEach>
-						<li class="page-item">
-							<a class="page-link" href="javascript:list_go('${pageMaker.next ? pageMaker.endPage+1 : cri.page}');">
-								<i class="fas fa-angle-right" ></i>
-							</a>
-						</li>
-						
-						<li class="page-item">
-							<a class="page-link" href="javascript:list_go('${pageMaker.realEndPage}');">
-								<i class="fas fa-angle-double-right"></i>
-							</a>
-						</li>	
-					</ul>
-				</nav>
+    			<%@ include file="/WEB-INF/views/include/pagination.jsp" %>
     		</div>
 	     </div>
    	</section>
   </div>
-  
-<form id="jobForm">
-	<input type="hidden" name="page" value=""/>
-	<input type="hidden" name="perPageNum" value=""/>
-	<input type="hidden" name="searchType" value=""/>
-	<input type="hidden" name="keyword" value=""/>
-</form>
 
 <script>
 window.onload = function(){	
 	MemberPictureThumb('<%=request.getContextPath()%>');
 }
 </script>
-
-<script>
-	function list_go(page, url){
-		if(!url) url="list.do";
-		var jobForm = $('#jobForm');
-		jobForm.find("[name='page']").val(page);
-		jobForm.find("[name='perPageNum']").val($('select[name="perPageNum"]').val());
-		jobForm.find("[name='searchType']").val($('select[name="searchType"]').val());
-		jobForm.find("[name='keyword']").val($('div.input-group>input[name="keyword"]').val());
-		jobForm.attr({
-			action : url,
-			method : 'get'
-		}).submit();
-	}
-</script>
-
-<!-- jQuery -->
-<script src="<%=request.getContextPath()%>/resources/bootstrap/plugins/jquery/jquery.min.js"></script>
-<!-- Bootstrap 4 -->
-<script src="<%=request.getContextPath()%>/resources/bootstrap/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-<!-- AdminLTE App -->
-<script src="<%=request.getContextPath()%>/resources/bootstrap/dist/js/adminlte.min.js"></script>
-<!-- common java script -->
-<script src="<%= request.getContextPath()%>/resources/js/common.js"></script>
-</body>
-</html>
-    
 
 
 

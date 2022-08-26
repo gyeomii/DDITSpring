@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 
 public class HttpRequestParameterAdapter {
 	public static <T> T execute(HttpServletRequest request, Class<T> className) throws Exception {
+		
 		// 의존성 확인 및 조힙
 		Method[] methods = className.getMethods(); // 파라미터를 담을 클래스의 메서드들을 뜯어서 Method객체로 만든다.
 
