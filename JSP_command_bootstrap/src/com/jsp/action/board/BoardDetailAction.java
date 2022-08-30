@@ -8,36 +8,35 @@ import com.jsp.dto.BoardVO;
 import com.jsp.service.BoardService;
 
 public class BoardDetailAction implements Action {
-	
 	private BoardService boardService;
 	public void setBoardService(BoardService boardService) {
 		this.boardService = boardService;
 	}
-	
+
 	@Override
-	public String process(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public String process(HttpServletRequest request, HttpServletResponse response)
+			throws Exception{
 		String url = "/board/detail";
-		
-		int bno = Integer.parseInt(request.getParameter("bno"));
-		String from = request.getParameter("from");
-		
+
 		try {
-			BoardVO board = null;
+			int bno = Integer.parseInt(request.getParameter("bno"));
+			String from = request.getParameter("from");
 			
-			if(from != null && from.equals("list")) {
-				board = boardService.getBoard(bno);
-				url = "redirect:/board/detail.do?bno=" + bno;
-				
-			}else {
-				board = boardService.getBoardForModify(bno);
+			BoardVO board;
+			if(from!=null && from.equals("list")) {
+				board=boardService.getBoard(bno);
+				url="redirect:/board/detail.do?bno="+bno;
+			}else {				
+				board=boardService.getBoardForModify(bno);
 			}
-			
+
 			request.setAttribute("board", board);
 		} catch (Exception e) {
 			e.printStackTrace();
-			url = "/board/detail_fail";
+			url = null;
+			throw e;
 		}
-		
+
 		return url;
 	}
 

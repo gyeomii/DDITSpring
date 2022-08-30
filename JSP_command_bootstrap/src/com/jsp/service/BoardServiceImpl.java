@@ -11,10 +11,12 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import com.jsp.command.Criteria;
 import com.jsp.command.PageMaker;
 import com.jsp.dao.BoardDAO;
+import com.jsp.dao.ReplyDAO;
 import com.jsp.dto.BoardVO;
 
 public class BoardServiceImpl implements BoardService{
 	
+
 	private SqlSessionFactory sqlSessionFactory;
 	public void setSqlSessionFactory(SqlSessionFactory sqlSessionFactory) {
 		this.sqlSessionFactory = sqlSessionFactory;
@@ -25,45 +27,46 @@ public class BoardServiceImpl implements BoardService{
 		this.boardDAO = boardDAO;
 	}
 	
+	private ReplyDAO replyDAO;
+	public void setReplyDAO(ReplyDAO replyDAO) {
+		this.replyDAO = replyDAO;
+	}
+	
 	@Override
 	public Map<String, Object> getBoardList(Criteria cri) throws SQLException {
-
 		SqlSession session = sqlSessionFactory.openSession();
 		try {
+			
 			Map<String, Object> dataMap = new HashMap<String, Object>();
-
+			
 			// 현재 page 번호에 맞는 리스트를 perPageNum 개수 만큼 가져오기.
-			List<BoardVO> boardList = boardDAO.selectSearchBoardList(session, cri);
-
+			List<BoardVO> boardList = boardDAO.selectBoardCriteria(session, cri);			
+			
 			// 전체 board 개수
-			int totalCount = boardDAO.selectSearchBoardListCount(session, cri);
-
+			int totalCount = boardDAO.selectBoardCriteriaTotalCount(session, cri);
+			
+			if(boardList != null) {
+				for (BoardVO boardVO : boardList) {
+					int bno = boardVO.getBno();
+					int replycnt = replyDAO.countReply(session, bno);
+					boardVO.setReplycnt(replycnt);
+				}
+			}
+			
 			// PageMaker 생성.
 			PageMaker pageMaker = new PageMaker();
 			pageMaker.setCri(cri);
 			pageMaker.setTotalCount(totalCount);
-
+			
 			dataMap.put("boardList", boardList);
 			dataMap.put("pageMaker", pageMaker);
-
+			
 			return dataMap;
 		} finally {
 			session.close();
 		}
 	}
-
-	@Override
-	public BoardVO getBoard(int bno) throws SQLException {
-		SqlSession session = sqlSessionFactory.openSession();
-		try {
-			BoardVO board = boardDAO.selectBoardByBno(session, bno);
-			boardDAO.increaseViewCount(session, bno);
-			return board;
-		} finally {
-			session.close();
-		}
-	}
-
+	
 	@Override
 	public BoardVO getBoardForModify(int bno) throws SQLException {
 		SqlSession session = sqlSessionFactory.openSession();
@@ -76,17 +79,32 @@ public class BoardServiceImpl implements BoardService{
 	}
 
 	@Override
+	public BoardVO getBoard(int bno) throws SQLException {
+		SqlSession session = sqlSessionFactory.openSession();
+		try {
+			BoardVO board = boardDAO.selectBoardByBno(session, bno);
+			boardDAO.increaseViewCnt(session, bno);
+			return board;
+		} finally {
+			session.close();
+		}
+	}
+
+	@Override
 	public void regist(BoardVO board) throws SQLException {
 		SqlSession session = sqlSessionFactory.openSession();
 		try {
 
-			int bno = boardDAO.selectBoardSequenceNextValue(session);
+			int bno = boardDAO.selectBoardSeqNext(session);
+
 			board.setBno(bno);
+
 			boardDAO.insertBoard(session, board);
 		} finally {
 			session.close();
 		}
 	}
+
 	@Override
 	public void modify(BoardVO board) throws SQLException {
 		SqlSession session = sqlSessionFactory.openSession();
@@ -108,5 +126,5 @@ public class BoardServiceImpl implements BoardService{
 			session.close();
 		}
 	}
-	
+
 }

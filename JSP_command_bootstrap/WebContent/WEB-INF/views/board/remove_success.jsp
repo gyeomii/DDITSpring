@@ -2,13 +2,13 @@
     pageEncoding="UTF-8"%>
 
     
+    
 <body>
-   
 
 <script>
 	alert("삭제되었습니다.");
-	window.close();
 	window.opener.location.reload();
+	window.close();
 </script>
 
 </body>

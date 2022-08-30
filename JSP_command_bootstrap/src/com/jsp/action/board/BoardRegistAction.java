@@ -15,24 +15,18 @@ public class BoardRegistAction implements Action {
 	public void setBoardService(BoardService boardService) {
 		this.boardService = boardService;
 	}
-
+	
 	@Override
-	public String process(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		String url = "/board/regist_success";
+	public String process(HttpServletRequest request, HttpServletResponse response)
+			throws Exception {
+		String url="/board/regist_success";
 		
-		try {
-			BoardVO board = HttpRequestParameterAdapter.execute(request, BoardVO.class);
-			
-			board.setTitle(HTMLInputFilter.htmlSpecialChars(board.getTitle()));
-			
-			boardService.regist(board);
-			
-		}catch(Exception e){
-			e.printStackTrace();
-			url = "/board/regist_fail";
-		}
+		BoardVO board = HttpRequestParameterAdapter.execute(request, BoardVO.class);
+				
+		board.setTitle(HTMLInputFilter.htmlSpecialChars(board.getTitle()));
+				
+		boardService.regist(board);
 		
 		return url;
 	}
-
 }

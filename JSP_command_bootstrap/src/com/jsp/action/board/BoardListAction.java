@@ -1,6 +1,5 @@
- package com.jsp.action.board;
+package com.jsp.action.board;
 
-import java.sql.SQLException;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -12,30 +11,36 @@ import com.jsp.command.CriteriaCommand;
 import com.jsp.controller.HttpRequestParameterAdapter;
 import com.jsp.service.BoardService;
 
-public class BoardListAction implements Action{
+public class BoardListAction implements Action {
 
 	private BoardService boardService;
-	
 	public void setBoardService(BoardService boardService) {
 		this.boardService = boardService;
 	}
-
+	
 	@Override
-	public String process(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public String process(HttpServletRequest request, HttpServletResponse response)
+			throws Exception {
 		String url = "/board/list";
 		
 		try {
-			//처리
-			CriteriaCommand command = HttpRequestParameterAdapter.execute(request, CriteriaCommand.class);
-			Criteria cri = command.toCriteria();
+
+			CriteriaCommand criCMD
+						=HttpRequestParameterAdapter.execute(request, CriteriaCommand.class);
+			
+			Criteria cri = criCMD.toCriteria();		
 			
 			Map<String, Object> dataMap = boardService.getBoardList(cri);
 			request.setAttribute("dataMap", dataMap);
-		} catch (SQLException e) {
-			e.printStackTrace();
-			url = "/error/500";
+			
+		}catch (Exception e) {			
+			e.printStackTrace();			
+			//url="/error/500.jsp";
+			throw e;
 		}
+		
 		return url;
 	}
 
+			
 }

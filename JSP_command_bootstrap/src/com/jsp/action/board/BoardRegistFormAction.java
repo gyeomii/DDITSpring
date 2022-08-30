@@ -12,5 +12,4 @@ public class BoardRegistFormAction implements Action {
 		String url = "/board/regist";
 		return url;
 	}
-
 }

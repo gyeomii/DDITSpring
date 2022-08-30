@@ -4,21 +4,25 @@
 	<bean id="memberDAO" class="com.jsp.dao.MemberDAOImpl">
 		<property name="sqlSessionFactory" ref-value="sqlSessionFactory"/>
 	</bean>
-	
 	<bean id="noticeDAO"  class="com.jsp.dao.NoticeDAOImpl"/>
 	<bean id="boardDAO"  class="com.jsp.dao.BoardDAOImpl"/>
+	<bean id="replyDAO"  class="com.jsp.dao.ReplyDAOImpl"/>
 	
 	<bean id="memberService" class="com.jsp.service.MemberServiceImpl">
 		<property name="memberDAO" ref-value="memberDAO"/>
 	</bean>
 	<bean id="noticeService" class="com.jsp.service.NoticeServiceImpl">
-    	<property name="noticeDAO" ref-value="noticeDAO"></property>
     	<property name="sqlSessionFactory" ref-value="sqlSessionFactory"></property>
+    	<property name="noticeDAO" ref-value="noticeDAO"></property>
     </bean>
 	<bean id="boardService" class="com.jsp.service.BoardServiceImpl">
-    	<property name="boardDAO" ref-value="boardDAO"></property>
     	<property name="sqlSessionFactory" ref-value="sqlSessionFactory"></property>
+    	<property name="boardDAO" ref-value="boardDAO"></property>
+    	<property name="replyDAO" ref-value="replyDAO"></property>
     </bean>
-	
+		<bean id="replyService" class="com.jsp.service.ReplyServiceImpl">
+    	<property name="sqlSessionFactory" ref-value="sqlSessionFactory"></property>
+    	<property name="replyDAO" ref-value="replyDAO"></property>
+    </bean>
 	
 </beans>

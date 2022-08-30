@@ -2,13 +2,14 @@
     pageEncoding="UTF-8"%>
 
     
-   
+    
 <body>
+	
+<script>
+	alert("등록되었습니다.");
+	window.opener.location.reload();
+	window.close();
+</script>
 
-	<script>
-		alert("게시글 등록이 성공했습니다.");
-		window.close();
-		window.opener.location.reload();	
-	</script>
+</body>
 
-</body>    
