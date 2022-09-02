@@ -220,7 +220,7 @@ function upload_go(){
     	  alert("사진이 업로드 되었습니다.");
 	    },
 	    error:function(error){
-	      alert("현재 사진 업로드가 불가합니다.\n 관리자에게 연락바랍니다.");
+	    	AjaxErrorSecurityRedirectHandler(error.status);
 	    }
 	});
 }
@@ -250,7 +250,7 @@ function idCheck_go(){
 			}
 		},
 		error : function(error){
-			alert("시스템장애로 가입이 불가합니다.");
+			AjaxErrorSecurityRedirectHandler(error.status);
 		}
 	});
 }

@@ -22,13 +22,13 @@ public class LoginAction implements Action {
 	
 	@Override
 	public String process(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		String url ="redirect:/member/list.do";
+		String url ="redirect:/index.do";
 		
 		String id = request.getParameter("id");
 		String pwd = request.getParameter("pwd");
 		String retUrl = request.getParameter("retUrl");
 		
-		if(retUrl != null) {
+		if(retUrl != null && !retUrl.isEmpty()) {
 			url = "redirect:" + URLDecoder.decode(retUrl, "utf-8");
 		}
 		
@@ -42,6 +42,7 @@ public class LoginAction implements Action {
 			
 		}catch(NotFoundIdException | InvalidPasswordException e) {
 			request.setAttribute("message", e.getMessage());
+			request.setAttribute("retUrl", retUrl);
 			url = "/common/login_fail";
 		}catch(Exception e) {
 			e.printStackTrace();

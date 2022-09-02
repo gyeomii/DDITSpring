@@ -4,5 +4,5 @@
 
 <script>
 	alert("${message}");
-	location.href="<%=request.getContextPath()%>/common/loginForm.do";
+	location.href="<%=request.getContextPath()%>/common/loginForm.do?retUrl=${retUrl}";
 </script>

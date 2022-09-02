@@ -74,7 +74,7 @@ window.onload=function(){
 		
 		return false;
 	});
-	
+		
 }
 
 function getPage(pageInfo,page){
@@ -152,58 +152,87 @@ function replyRegist_go(){
 	}
 	
 	//console.log(data);
+	
 	$.ajax({
-		url : "<%= request.getContextPath()%>/reply/regist.do",
-		type : "post",
-		data : JSON.stringify(data),
+		url:"<%=request.getContextPath()%>/reply/regist.do",
+		type:"post",
+		data:JSON.stringify(data),	
 		contentType:'application/json',
-		success:function(data){
+		success:function(page){
 			alert('댓글이 등록되었습니다.\n마지막페이지로 이동합니다.');
-			replyPage=data;
-			getPage("<%=request.getContextPath()%>/reply/list.do?bno="+bno+"&page="+data);
-			$('#newReplyText').val("");
+			replyPage=data; //페이지이동
+			getPage("<%=request.getContextPath()%>/reply/list.do?bno="+bno+"&page="+page); //리스트 출력
+			
+			$('#newReplyText').val("");	
 		},
-		error : function(error){
-			alert("댓글 등록이 실패했습니다.")
+		error:function(error){
+			AjaxErrorSecurityRedirectHandler(error.status);	
 		}
 	});
+	
 }
 
 
-function replyModifyModal_go(rno){
+function replyModifyModal_go(rno){	
+	//alert("reply modify modal");
 	$('div#modifyModal div.modal-body #replytext').val($('div#'+rno+'-replytext').text());
 	$('div#modifyModal div.modal-header h4.modal-title').text(rno);
-}
+} 
+
 
 function replyModify_go(){
-	var rno = $('.modal-title').text();
-	var replytext = $('#replytext'),val();
+	//alert("reply modify btn");
 	
-	var sendData = {
-			"rno" : rno,
-			"replytext" : replytext
+	var rno=$('.modal-title').text();
+	var replytext=$('#replytext').val();
+	
+	var sendData={
+			"rno":rno,
+			"replytext":replytext
 	}
 	
 	$.ajax({
-		url : "<%=request.getContextPath()%>/reply/modify.do",
-		type : "post",
-		data : JSON.stringify(sendData),
-		contentType : "applictaion/json",
-		success : function(result){
-			alert('수정되었습니다.');
-			getPage("<%=request.getContextPath()%>/replt/list.do?bnp=${board.bno}&page="+replyPage);
+		url:"<%=request.getContextPath()%>/reply/modify.do",
+		type:"post",
+		data:JSON.stringify(sendData),
+		contentType:"application/json",
+		success:function(result){
+			alert("수정되었습니다.");	
+			getPage("<%=request.getContextPath()%>/reply/list.do?bno=${board.bno}&page="+replyPage);
 		},
-		error : function(){
-			alert('수정 실패했습니다.');
+		error:function(error){
+			AjaxErrorSecurityRedirectHandler(error.status);
 		},
-		complete : function(){
+		complete:function(){
 			$('#modifyModal').modal('hide');
 		}
 	});
 }
+
 function replyRemove_go(){
-	alert('reply remove btn');
+	//alert("reply remove btn");
+	
+	var rno=$('.modal-title').text();
+	
+	//alert(rno);
+	
+	$.ajax({
+		url:"<%=request.getContextPath()%>/reply/remove.do?rno="+rno+"&page="+replyPage+"&bno=${board.bno}",
+		type:"get",
+		success:function(page){
+			alert("삭제되었습니다.");
+			getPage("<%=request.getContextPath()%>/reply/list.do?bno=${board.bno}&page="+page);
+			replyPage=page;
+		},
+		error:function(error){
+			AjaxErrorSecurityRedirectHandler(error.status);
+		},
+		complete:function(){
+			$('#modifyModal').modal('hide');
+		}
+	});
 }
+
 </script>
 
 
