@@ -61,7 +61,12 @@ public class DispatcherServlet extends HttpServlet {
 					
 				}catch (Exception e) {
 					e.printStackTrace();
+					// 톰캣 에러페이지
 					response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+					// 에러페이지를 내가 만든 화면으로 컨트롤 하고 싶으면
+					//request.setAttribute("viewName", "/error/servlet_error");
+					//response.setStatus(500);
+					//JSPViewResolver.view(request, response);
 				}
 			}else {
 				response.sendError(HttpServletResponse.SC_NOT_FOUND);

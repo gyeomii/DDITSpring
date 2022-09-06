@@ -1,5 +1,6 @@
 package com.jsp.action.member;
 
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
@@ -23,6 +24,7 @@ public class MemberListAction implements Action {
 	@Override
 	public String process(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String url = "/member/list";
+		
 		String pageParam = request.getParameter("page");
 		String perPageNumParam = request.getParameter("perPageNum");
 		String  keyword = request.getParameter("keyword");
@@ -44,7 +46,7 @@ public class MemberListAction implements Action {
 				cri.setKeyword(keyword);
 				cri.setSearchType(searchType);
 			}catch (Exception e) {
-				response.sendError(response.SC_BAD_REQUEST);
+//				response.sendError(response.SC_BAD_REQUEST);
 				return null;
 			}
 		}
@@ -54,7 +56,8 @@ public class MemberListAction implements Action {
 			request.setAttribute("dataMap", dataMap);
 		} catch (SQLException e) {
 			e.printStackTrace();
-			url = "/error/500";
+			url = "/error/sqlException";
+			response.setStatus(500);
 		}
 		return url;
 	}

@@ -8,6 +8,8 @@
 	<bean id="boardDAO"  class="com.jsp.dao.BoardDAOImpl"/>
 	<bean id="replyDAO"  class="com.jsp.dao.ReplyDAOImpl"/>
 	<bean id="menuDAO"  class="com.jsp.dao.MenuDAOImpl"/>
+	<bean id="pdsDAO"  class="com.jsp.dao.PdsDAOImpl"/>
+	<bean id="attachDAO"  class="com.jsp.dao.AttachDAOImpl"/>
 	<!-- Service -->
 	<bean id="memberService" class="com.jsp.service.MemberServiceImpl">
 		<property name="memberDAO" ref-value="memberDAO"/>
@@ -28,6 +30,11 @@
 	<bean id="menuService" class="com.jsp.service.MenuServiceImpl">
     	<property name="sqlSessionFactory" ref-value="sqlSessionFactory"></property>
     	<property name="menuDAO" ref-value="menuDAO"></property>
+    </bean>
+	<bean id="pdsService" class="com.jsp.service.PdsServiceImpl">
+    	<property name="sqlSessionFactory" ref-value="sqlSessionFactory"></property>
+    	<property name="pdsDAO" ref-value="pdsDAO"></property>
+    	<property name="attachDAO" ref-value="attachDAO"></property>
     </bean>
 	
 </beans>
