@@ -3,7 +3,7 @@
 <%@ page trimDirectiveWhitespaces="true" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <title>게시글 상세</title>
 
 <body>
@@ -43,8 +43,10 @@
 					<div class="card-header">
 						<h3 class="card-title">상세보기</h3>
 						<div class="card-tools">
+						  <sec:authorize access="isAuthenticated()">
 							<button type="button" id="modifyBtn" class="btn btn-warning" onclick="modify_go();">MODIFY</button>						
 						    <button type="button" id="removeBtn" class="btn btn-danger" onclick="remove_go();">REMOVE</button>
+						   </sec:authorize>
 						    <button type="button" id="listBtn" class="btn btn-primary" onclick="CloseWindow();">CLOSE</button>
 					    </div>
 					</div>
@@ -132,8 +134,10 @@
         <p><input type="text" id="replytext" class="form-control"></p>
       </div>
       <div class="modal-footer">
+
         <button type="button" class="btn btn-info" id="replyModBtn" onclick="replyModify_go();">Modify</button>
         <button type="button" class="btn btn-danger" id="replyDelBtn" onclick="replyRemove_go();">DELETE</button>
+
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
       </div>
     </div>

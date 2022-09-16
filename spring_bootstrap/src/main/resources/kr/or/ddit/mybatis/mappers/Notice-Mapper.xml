@@ -75,6 +75,13 @@
 		where nno=#{nno}
 	</select>
 	
+	<select id="selectNoticeByImage" parameterType="string" resultType="notice">
+		select 
+		* 
+		from notice
+		where content like '%'||#{imageFile}||'%'
+	</select>
+	
 	<select id="selectNoticeSequenceNextValue" resultType="int">
 		select notice_seq.nextVal
 		from dual

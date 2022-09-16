@@ -158,11 +158,10 @@ function replyRegist_go(){
 		type:"post",
 		data:JSON.stringify(data),	
 		contentType:'application/json',
-		success:function(data){
+		success:function(result){
 			alert('댓글이 등록되었습니다.\n마지막페이지로 이동합니다.');
-			replyPage=data; //페이지이동
-			getPage("<%=request.getContextPath()%>/replies/"+bno+"/"+data); //리스트 출력
-			
+			replyPage=result; //페이지이동
+			getPage("<%=request.getContextPath()%>/replies/"+bno+"/"+result); //리스트 출력
 			$('#newReplyText').val("");	
 		},
 		error:function(error){

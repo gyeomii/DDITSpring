@@ -45,7 +45,7 @@
 		  p:sqlSession-ref="sqlSession"
 		  p:menuDAO-ref="oldMenuDAO"
 	/>
-	<bean id="notieDAO" class="kr.or.ddit.dao.NoticeDAOImpl"
+	<bean id="noticeDAO" class="kr.or.ddit.dao.NoticeDAOImpl"
 		  p:sqlSession-ref="sqlSession"
 		  p:noticeDAO-ref="oldNoticeDAO"
 	/>
@@ -70,7 +70,7 @@
 		  p:menuDAO-ref="menuDAO"
 	/>
 	<bean id="noticeService" class="kr.or.ddit.service.NoticeServiceImpl"
-		  p:noticeDAO-ref="notieDAO"
+		  p:noticeDAO-ref="noticeDAO"
 	/>
 	<bean id="pdsService" class="kr.or.ddit.service.PdsServiceImpl"
 		  p:pdsDAO-ref="pdsDAO"

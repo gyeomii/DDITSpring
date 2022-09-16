@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-    
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
     
 <head></head>
 
@@ -40,10 +40,12 @@
 					<div class="card-header">
 						<h3 class="card-title p-1">상세보기</h3>
 						<div class ="card-tools">
+						  <sec:authorize access="hasAnyRole('ROLE_ADMIN')">
 							<button type="button" class="btn btn-primary" id="modifyBtn" onclick="modify_go('${notice.nno}');">수 정</button>
 							&nbsp;&nbsp;&nbsp;&nbsp;
 							<button type="button" class="btn btn-danger" id="removeBtn" onclick="remove_go('${notice.nno}');">삭 제</button>
 							&nbsp;&nbsp;&nbsp;&nbsp;
+						  </sec:authorize>
 							<button type="button" class="btn btn-warning" id="cancelBtn" onclick="CloseWindow();" >취 소</button>
 						</div>
 					</div><!--end card-header  -->

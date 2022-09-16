@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
 <c:set var="noticeList" value="${dataMap.noticeList }" />
 <c:set var="pageMaker" value="${dataMap.pageMaker }" />
@@ -42,7 +42,9 @@
     <section class="content">		
 		<div class="card">
 			<div class="card-header with-border">
+			  <sec:authorize access="hasAnyRole('ROLE_ADMIN,ROLE_MANAGER')">
 				<button type="button" class="btn btn-primary" id="registBtn" onclick="OpenWindow('registForm.do','공지등록',800,700);">공지등록</button>				
+		      </sec:authorize>
 				<div id="keyword" class="card-tools" style="width:540px;">
 					<div class="input-group row">
 						<select class="form-control col-md-3" name="perPageNum" id="perPageNum"	onchange="list_go(1);">

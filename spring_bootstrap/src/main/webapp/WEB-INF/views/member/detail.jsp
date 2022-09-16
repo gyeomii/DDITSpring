@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-	
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <div class="wrapper">
   <div >
   	 <section class="content-header">
@@ -70,6 +70,7 @@
 	              </div>  
 		          <div class="card-footer" style="padding:5px 0;" >
 		          		<div class="row">
+		          		<sec:authorize access="hasAnyRole('ROLE_ADMIN')">
 			          		<div class="col-sm-3 text-center">
 			          			<button type="button" onclick="location.href='modifyForm.do?id=${member.id}';" id="modifyBtn" class="btn btn-warning ">수 정</button>
 			          		</div>
@@ -86,6 +87,7 @@
 			          			<button type="button" onclick="" id="activeBtn" class="btn btn-info" >활&nbsp;&nbsp;성</button>
 			          		</c:if>
 			          		</div>
+		          		</sec:authorize>
 			          		<div class="col-sm-3 text-center">
 			            		<button type="button" id="listBtn" onclick="CloseWindow();" class="btn btn-primary pull-right">닫 기</button>
 			            	</div>

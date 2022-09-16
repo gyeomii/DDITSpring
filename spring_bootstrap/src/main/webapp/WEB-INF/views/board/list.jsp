@@ -3,7 +3,7 @@
 <%@ page trimDirectiveWhitespaces="true" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <c:set var="pageMaker" value="${dataMap.pageMaker }" />
 <c:set var="cri" value="${dataMap.pageMaker.cri }" />
 <c:set var="boardList" value="${dataMap.boardList }" />
@@ -47,7 +47,9 @@
     <section class="content">		
 		<div class="card">
 			<div class="card-header with-border">
+			<sec:authorize access="isAuthenticated()">
 				<button type="button" class="btn btn-primary" id="registBtn" onclick="OpenWindow('registForm.do','글등록',800,700);">게시글등록</button>				
+			</sec:authorize>
 				<div id="keyword" class="card-tools" style="width:450px;">
 					<div class="input-group row">
 						<select class="form-control col-md-3" name="perPageNum" id="perPageNum"	onchange="list_go(1);">

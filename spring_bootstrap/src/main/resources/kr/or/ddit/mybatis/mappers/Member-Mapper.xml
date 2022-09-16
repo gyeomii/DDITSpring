@@ -25,6 +25,14 @@
 		where id=#{id}
 	</select>
 	
+	<select id="selectMemberByPicture" parameterType="str" resultType="member">
+		select
+		*
+		from member
+		where picture=#{picture}
+	</select>
+	
+	
 	<select id="selectMemberList" resultType="member">
 		select
 		* 

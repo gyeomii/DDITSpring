@@ -55,7 +55,29 @@ public class CommonController {
 
 		return url;
 	}
+	
+	@RequestMapping("/security/accessDenied")
+	public void accessDenied() {}
+	
+	@RequestMapping("/common/loginTimeOut")
+	public String loginTimeOut(Model model) throws Exception{
+		String url = "security/sessionOut";
+		
+		model.addAttribute("message", "세션이 만료되었습니다.\\n다시 로그인 하세요.");
 
+		return url;
+	}
+	
+	@RequestMapping("/common/loginExpired")
+	public String loginExpired(Model model) throws Exception{
+		String url = "security/sessionOut";
+		
+		model.addAttribute("message", "다른 장치에서 로그인 되었습니다.\\n로그아웃 합니다.");
+
+		return url;
+	}
+	
+	
 	@GetMapping("/common/loginForm")
 	public String loginForm(@RequestParam(defaultValue = "") String error, 
 							@ModelAttribute("retUrl") String retUrl, HttpServletResponse response) {
@@ -70,32 +92,32 @@ public class CommonController {
 		return url;
 	}
 
-	@PostMapping(value = "/common/login")
-	public String login(String id, String pwd, HttpSession session, RedirectAttributes rttr) throws Exception {
-		String url = "redirect:/index.do";
-
-		try {
-			memberService.login(id, pwd);
-
-			session.setAttribute("loginUser", memberService.getMember(id));
-		} catch (NotFoundIdException | InvalidPasswordException e) {
-			rttr.addFlashAttribute("message", e.getMessage());
-			rttr.addFlashAttribute("pastID", id);
-			url = "redirect:/common/loginForm.do";
-		} catch (SQLException e) {
-			e.printStackTrace();
-			throw e;
-		}
-		return url;
-	}
-	
-	@GetMapping(value="/common/logout")
-	public String logout(HttpSession session){
-		String url="redirect:/";
-		session.invalidate();
-		
-		return url;
-	}
+//	@PostMapping(value = "/common/login")
+//	public String login(String id, String pwd, HttpSession session, RedirectAttributes rttr) throws Exception {
+//		String url = "redirect:/index.do";
+//
+//		try {
+//			memberService.login(id, pwd);
+//
+//			session.setAttribute("loginUser", memberService.getMember(id));
+//		} catch (NotFoundIdException | InvalidPasswordException e) {
+//			rttr.addFlashAttribute("message", e.getMessage());
+//			rttr.addFlashAttribute("pastID", id);
+//			url = "redirect:/common/loginForm.do";
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//			throw e;
+//		}
+//		return url;
+//	}
+//	
+//	@GetMapping(value="/common/logout")
+//	public String logout(HttpSession session){
+//		String url="redirect:/";
+//		session.invalidate();
+//		
+//		return url;
+//	}
 	
 	@RequestMapping("/subMenu")
 	@ResponseBody

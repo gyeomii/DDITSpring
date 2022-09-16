@@ -14,6 +14,8 @@ public interface PdsDAO {
 	
 	PdsVO selectPdsByPno(int pno) throws SQLException;
 	
+	PdsVO selectPdsByImage(String ImageFile) throws SQLException;
+	
 	void insertPds( PdsVO pds) throws SQLException;
 	void updatePds( PdsVO pds) throws SQLException;
 	void deletePds( int pno) throws SQLException;

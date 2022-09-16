@@ -62,5 +62,11 @@ public class PdsDAOImpl implements kr.or.ddit.dao.PdsDAO{
 		return pdsDAO.selectPdsSeqNext(session);
 	}
 
+	@Override
+	public PdsVO selectPdsByImage(String ImageFile) throws SQLException {
+		PdsVO pds = session.selectOne("Pds-Mapper.selectPdsByImage", ImageFile);
+		return pds;
+	}
+
 	
 }

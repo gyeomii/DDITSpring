@@ -17,6 +17,8 @@ public interface NoticeDAO {
 	
 	NoticeVO selectNoticeByNno(int nno) throws SQLException;
 	
+	NoticeVO selectNoticeByImage(String imageFile) throws SQLException;
+	
 	// viewcnt 증가
 	void increaseViewCount(int nno) throws SQLException;
 

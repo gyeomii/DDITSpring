@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%> 
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
 <title>자료실 상세보기</title>
 
@@ -94,10 +95,10 @@
 												
 					</div>
 					<div class="card-footer">
-						
+						<sec:authorize access="hasAnyRole('ROLE_ADMIN')">
 							<button type="button" id="modifyBtn" class="btn btn-warning" onclick="submit_go('modifyForm.do','${pds.pno}');">Modify</button>						
 					    	<button type="button" id="removeBtn" class="btn btn-danger" onclick="submit_go('remove.do','${pds.pno}');">REMOVE</button>
-					   
+					    </sec:authorize>
 					    <button type="button" id="listBtn" class="btn btn-primary" onclick="CloseWindow();">CLOSE </button>
 					</div>									
 				</div><!-- end card -->				
